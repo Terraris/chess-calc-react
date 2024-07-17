@@ -1,1 +1,0 @@
-# chess-calc-react
