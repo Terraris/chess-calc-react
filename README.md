@@ -59,6 +59,8 @@ This project uses the following dependencies:
 - react-scripts
 - typescript
 - web-vitals
+- bootstrap
+- react-bootstrap
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see
