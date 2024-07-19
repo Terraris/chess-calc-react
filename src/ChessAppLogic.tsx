@@ -1,14 +1,18 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {ChessResult} from "./types";
+import { useCallback } from 'react';
 
-export default function ChessAppLogic() {
+
+export default function useChessAppLogic(initialPosition: { row: number, column: number }) {
     const [boardSize, setBoardSize] = useState<number>(8);
     const [piece, setPiece] = useState<string>('Knight');
     const [results, setResults] = useState<ChessResult[] | null>(null);
     const [currentBoardIndex, setCurrentBoardIndex] = useState<number>(0);
     const [totalThreats, setTotalThreats] = useState(0);
     const [meanThreatLevel, setMeanThreatLevel] = useState(0);
+    // noinspection JSUnusedLocalSymbols
+    const [position, setPosition] = useState(initialPosition);
 
     const simulate = async () => {
         const response = await axios.get(`http://localhost:8080/api/chess/simulate?piece=${piece}&size=${boardSize}`);
@@ -56,6 +60,35 @@ export default function ChessAppLogic() {
         }
     }
 
+    const movePiece = useCallback((dx: number, dy: number) => {
+        setPosition((prev) => {
+            const newRow = Math.min(Math.max(prev.row + dy, 0), boardSize - 1);
+            const newCol = Math.min(Math.max(prev.column + dx, 0), boardSize - 1);
+
+            if (results) {
+                const updatedIndex = results.findIndex(
+                    (result) =>
+                        result.location.row === newRow && result.location.column === newCol
+                );
+
+                if (updatedIndex >= 0) {
+                    setCurrentBoardIndex(updatedIndex);
+                }
+            }
+
+            return {
+                row: newRow,
+                column: newCol,
+            };
+        });
+    }, [results, boardSize]);
+
+    const movePieceDown = useCallback(() => movePiece(0, -1), [movePiece]);
+    const movePieceUp = useCallback(() => movePiece(0, 1), [movePiece]);
+    const movePieceRight = useCallback(() => movePiece(-1, 0), [movePiece]);
+    const movePieceLeft = useCallback(() => movePiece(1, 0), [movePiece]);
+
+
     return {
         boardSize, setBoardSize,
         piece, setPiece,
@@ -63,6 +96,10 @@ export default function ChessAppLogic() {
         currentBoardIndex, setCurrentBoardIndex,
         totalThreats, setTotalThreats,
         meanThreatLevel, setMeanThreatLevel,
-        simulate, nextBoard, previousBoard, calculateStats
+        simulate, nextBoard, previousBoard, calculateStats,
+        movePieceUp,
+        movePieceDown,
+        movePieceLeft,
+        movePieceRight
     }
 }

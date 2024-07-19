@@ -10,7 +10,7 @@ const ChessBoard: React.FC<ChessBoardProps> = ({result}) => {
     const boardUtils = new ChessBoardUtils();
     const board = result.board;
 
-    const {files, ranks} = boardUtils.generateChessNotations(board.size);
+    const {files, ranks} = boardUtils.generateBoardNotations(board.size);
 
     return (
         <div className='chess-board justify-content-md-center'
@@ -25,7 +25,7 @@ const ChessBoard: React.FC<ChessBoardProps> = ({result}) => {
                 const colFile = i % board.size;
                 let extraClass = '';
 
-                if (boardUtils.isCellContainsPiece(row, col, board.occupiedLocation)) {
+                if (boardUtils.isCellOccupied(row, col, board.occupiedLocation)) {
                     extraClass = 'piece';
                 } else if (boardUtils.isCellUnderThreat(row, col, board.cellsUnderThreat)) {
                     extraClass = 'threat';

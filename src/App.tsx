@@ -6,18 +6,48 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {Container} from 'react-bootstrap';
 
-import ChessAppLogic from './ChessAppLogic';
+import useChessAppLogic from './ChessAppLogic';
 
 export default function App() {
-    const appLogic = ChessAppLogic();
+    const appLogic = useChessAppLogic({row: 0, column: 0});
 
     useEffect(() => {
         document.title = "My Chess App";
     }, []);
 
     useEffect(() => {
+        window.focus();
+    }, []);
+
+    useEffect(() => {
         appLogic.calculateStats();
     }, [appLogic.results]);
+
+    useEffect(() => {
+        const handleKeydown = (event: KeyboardEvent) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    appLogic.movePieceUp();
+                    break;
+                case 'ArrowDown':
+                    appLogic.movePieceDown();
+                    break;
+                case 'ArrowLeft':
+                    appLogic.movePieceLeft();
+                    break;
+                case 'ArrowRight':
+                    appLogic.movePieceRight();
+                    break;
+                default:
+                    return;
+            }
+            event.preventDefault();
+        };
+        window.addEventListener('keydown', handleKeydown);
+        return () => {
+            window.removeEventListener('keydown', handleKeydown);
+        };
+    }, [appLogic, appLogic.results]);
 
     return (
         <Container className="App">
@@ -27,8 +57,8 @@ export default function App() {
                 onBoardSizeChange={(e) => appLogic.setBoardSize(Number(e.target.value))}
                 onPieceChange={(e) => appLogic.setPiece(e.target.value)}
                 onSimulate={appLogic.simulate}
-                onNext={appLogic.nextBoard}
-                onPrevious={appLogic.previousBoard}
+                onNext={appLogic.movePieceRight}
+                onPrevious={appLogic.movePieceLeft}
             />
             {appLogic.results && (
                 <Results

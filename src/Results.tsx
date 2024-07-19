@@ -14,6 +14,10 @@ function Results({results, currentBoardIndex, totalThreats, meanThreatLevel}: Re
     return (
         <div>
             <Row className="justify-content-md-center mt-3 mb-3">
+                Use the Arrow Keys to navigate through the positions...
+            </Row>
+
+            <Row className="justify-content-md-center mt-3 mb-3">
                 <Col md="auto">
                     <ChessBoard result={results[currentBoardIndex]}/>
                 </Col>
