@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, InputGroup, Row, Col} from 'react-bootstrap';
+import {Button, Col, Form, InputGroup, Row} from 'react-bootstrap';
 
 interface BoardControlsProps {
     boardSize: number;
@@ -7,37 +7,40 @@ interface BoardControlsProps {
     onBoardSizeChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onPieceChange: React.ChangeEventHandler; // Updated type
     onSimulate: () => void;
+    onNext: () => void;
+    onPrevious: () => void;
 }
 
 const BoardControls: React.FC<BoardControlsProps> = ({
-                                                         boardSize, piece, onBoardSizeChange, onPieceChange, onSimulate
+                                                         boardSize, piece, onBoardSizeChange, onPieceChange, onSimulate,
+                                                         onNext, onPrevious
                                                      }) => (
     <div className="board-controls">
         <Row>
             <Col>
                 <InputGroup className="mb-8">
-                    <InputGroup>
+                    <InputGroup className="mb-8">
                         <InputGroup.Text id="board-size-label">Board Size</InputGroup.Text>
                     </InputGroup>
-                    <Form.Control type="number" onChange={onBoardSizeChange} value={boardSize} aria-label="Board size"
+                    <Form.Control type="number" onChange={onBoardSizeChange} value={boardSize}
                                   aria-describedby="board-size-label"/>
                 </InputGroup>
             </Col>
-
             <Col>
-                <Form.Group controlId="piece-select">
-                    <Form.Label>Piece</Form.Label>
-                    <Form.Control as="select" onChange={onPieceChange} value={piece}>
-                        <option value='Knight'>Knight</option>
-                        <option value='Rook'>Rook</option>
+                <InputGroup className="mb-8">
+                    <InputGroup className="mb-8">
+                        <InputGroup.Text id="piece-label">Piece</InputGroup.Text>
+                    </InputGroup>
+                    <Form.Control as="select" onChange={onPieceChange} value={piece} aria-describedby="piece-label">
+                        <option>Knight</option>
+                        <option>Rook</option>
                     </Form.Control>
-                </Form.Group>
+                </InputGroup>
             </Col>
-
-            <Col>
-                <Form.Group className="d-flex align-items-end">
-                    <Button variant="primary" onClick={onSimulate}>Simulate</Button>
-                </Form.Group>
+            <Col md="auto">
+                <Button className="ml-2" onClick={onSimulate}>Simulate</Button>
+                <Button className="ml-2" onClick={onPrevious}>Previous board</Button>
+                <Button className="ml-2" onClick={onNext}>Next board</Button>
             </Col>
         </Row>
     </div>
