@@ -5,7 +5,7 @@ interface BoardControlsProps {
     boardSize: number;
     piece: string;
     onBoardSizeChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onPieceChange: React.ChangeEventHandler; // Updated type
+    onPieceChange: React.ChangeEventHandler;
     onSimulate: () => void;
     onNext: () => void;
     onPrevious: () => void;

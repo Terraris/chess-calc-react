@@ -1,5 +1,3 @@
-// ChessBoard.tsx
-
 import {ChessBoardUtils} from './ChessBoardUtils';
 import React from 'react';
 import {ChessResult} from "./types";
@@ -12,7 +10,6 @@ const ChessBoard: React.FC<ChessBoardProps> = ({result}) => {
     const boardUtils = new ChessBoardUtils();
     const board = result.board;
 
-    // use utility function to generate chess notations
     const {files, ranks} = boardUtils.generateChessNotations(board.size);
 
     return (
