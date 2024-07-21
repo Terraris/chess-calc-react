@@ -3,6 +3,12 @@
     padding: 20px;
 }
 
+.navbar .navbar-collapse {
+    display: flex;
+    align-items: center;
+
+}
+
 .board-controls {
     display: flex;
     flex-wrap: wrap;
@@ -18,8 +24,10 @@ label, button {
     gap: 5px; /* space between label text and input/select */
 }
 
-button {
-    padding: 10px 20px;
+.btn {
+    display: flex;
+    align-items: center;
+    margin: var(--bs-navbar-brand-padding-y);
     font-size: 20px;
     background-color: #4CAF50;
     border: none;

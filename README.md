@@ -1,14 +1,13 @@
 # Chess Calculation App
 
-Welcome to Chess Calculation App, a React application designed to help calculate the possible moves for a chess piece. 
-It pairs with a running backend of [Chess Calc](https://github.com/Terraris/chess-calc). Just like the Chess Scenario 
+Welcome to Chess Calculation App, a React application designed to help calculate the possible moves for a chess piece.
+It pairs with a running backend of [Chess Calc](https://github.com/Terraris/chess-calc). Just like the Chess Scenario
 Generator client, this React app tests out various chess pieces and their movements.
-
 
 ## Features
 
 - **Interactive Board UI**: Users can input their chess piece's current coordinates onto an interactive format.
-- **Coordinate Calculation**: The server-side calculations are done restfully. Once the coordinates are inputted, 
+- **Coordinate Calculation**: The server-side calculations are done restfully. Once the coordinates are inputted,
 - the app takes care of the rest by showing movement possibilities for the selected piece.
 - **Responsive Design**: The app is fully responsive and can be used on various device sizes.
 - **User-friendly Interface**: With an intuitive design, users can easily navigate through the application.
@@ -36,16 +35,19 @@ After cloning this repository, navigate to its directory and run the following c
 
 ### `npm start`
 
-This starts the app in development mode and opens it in the browser at http://localhost:3000. The page will reload if 
+This starts the app in development mode and opens it in the browser at http://localhost:3000. The page will reload if
 you make edits, and any lint errors will display in the console.
 
 #### To build the application for production:
+
 ### `npm run build`
 
 This builds the app for production in the build folder, bundling React in production mode for optimal performance.
 
 ## Bill of Materials
+
 This project uses the following dependencies:
+
 - @testing-library/jest-dom
 - @testing-library/react
 - @testing-library/user-event
@@ -63,11 +65,13 @@ This project uses the following dependencies:
 - react-bootstrap
 
 ## License
+
 This project is licensed under the GNU General Public License v3.0 - see
 the [license](https://www.gnu.org/licenses/gpl-3.0.en.html) file for details.
 
 ## Learn More
 
-To learn more about Create React App, visit the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To learn more about Create React App, visit
+the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn more about React, check the [React documentation](https://reactjs.org/).
